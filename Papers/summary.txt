@@ -1,0 +1,41 @@
+1.Arabic Text Diacritization Using Deep Neural:
+	The goal of this work is to show the superiority of the neural approach compared with other approaches.
+	The neural approach we consider is Shakkala of Barqawi and Zerrouki [18]. The reason for selecting this system is because the
+	Shakkala **code and the resources used to build it are publicly available
+-Survery on approcheas has alot of tools and papers and links
+- Tashkeela Corpus Issues
+- Cleaning Data--> Cleaned data set and all the cleanning process https://github.com/AliOsm/arabic-text-diacritization
+- Metric: Diacritic Error Rate (DER) -W Word Error Rate (WER)  vip in page 6 sth related to Metric in Tables V and VI.
+
+
+Results:Mishkal and Harakat are the best systems among the non-neural ones, but their performance in not comparable to Shakkala. 
+Another advantage of Shakkala is its remarkable ability to handle the difficult case of diacritizing the last letter of each word.
+
+
+
+Referred Models:
+MADAMIRA analyzer [9]
+Elshafei et al. [17]
+
+Belinkov and Glass [5] -->This approach is open-sourced and its results rival
+those of the state-of-the-art systems
+
+MaxEnt approach of Zitouni and Sarikaya [8].
+Abandah et al.[4] --> error correction and preporcesing technques for data set
+
+Shakkala was built by Barqawi and Zerrouki [18] --most importantly, the open-source project
+	Web UI --> https://ahmadai.com/shakkala/
+	Code --> https://github.com/Barqawiz/Shakkala
+
+	It has three different trained models.
+	The first (and earliest) version is used in the website,
+	while the third (and latest) version provides the best 
+	results but is limited to 315 characters at a time
+
+Baselines: (Section 2.B)
+1.Ali-Soft
+2. Farasa  code
+3. Harakat
+4. MADAMIRA-->The system is built for either MSA or Egyptian Dialect  SO NOT SUITBALE BEC WE WORK CLASSICAL Arabic
+5. Mishkal Mishkal-->Open source rule-based Arabic text diacritization system. [https://tahadz.com/mishkal]
+6. Tashekalaa Model --> is an n-gram model for Arabic language diacritization trained using the Tashkeela Data set[https://github.com/Anwarvic/Tashkeela-Model]
