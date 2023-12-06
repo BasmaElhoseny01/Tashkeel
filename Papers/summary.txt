@@ -1,4 +1,6 @@
 1.Arabic Text Diacritization Using Deep Neural:
+https://paperswithcode.com/paper/190501965
+
 	The goal of this work is to show the superiority of the neural approach compared with other approaches.
 	The neural approach we consider is Shakkala of Barqawi and Zerrouki [18]. The reason for selecting this system is because the
 	Shakkala **code and the resources used to build it are publicly available
@@ -33,9 +35,16 @@ Shakkala was built by Barqawi and Zerrouki [18] --most importantly, the open-sou
 	results but is limited to 315 characters at a time
 
 Baselines: (Section 2.B)
-1.Ali-Soft
+1. Ali-Soft
 2. Farasa  code
 3. Harakat
 4. MADAMIRA-->The system is built for either MSA or Egyptian Dialect  SO NOT SUITBALE BEC WE WORK CLASSICAL Arabic
 5. Mishkal Mishkal-->Open source rule-based Arabic text diacritization system. [https://tahadz.com/mishkal]
 6. Tashekalaa Model --> is an n-gram model for Arabic language diacritization trained using the Tashkeela Data set[https://github.com/Anwarvic/Tashkeela-Model]
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.Neural Arabic Text Diacritization State of the Art Results and a Novel Approach for Machine Translation
+https://paperswithcode.com/paper/neural-arabic-text-diacritization-state-of-1
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.Effective Deep Learning Models for Automatic Diacritization of Arabic Text
+https://paperswithcode.com/paper/effective-deep-learning-models-for-automatic
