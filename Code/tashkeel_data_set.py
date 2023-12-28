@@ -63,6 +63,10 @@ class TashkeelDataset(torch.utils.data.Dataset):
       # print("...........")
       if( len(x_padded[i])!=max_length or len(y_padded[i])!=max_length ):
         print("Errrrrrrrrr",i,len(x_padded[i]))
+    
+
+    # Add Features Extractions
+    
 
 
     
