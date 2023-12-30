@@ -10,15 +10,16 @@ def evaluate(model, test_dataset, batch_size=512):
   ########################### TODO: Replace the Nones in the following code ##########################
 
   # (1) create the test data loader
-  test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size,shuffle=False)
+  test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
   # GPU Configuration
   use_cuda = torch.cuda.is_available()
-  use_cuda=False
   device = torch.device("cuda" if use_cuda else "cpu")
 
+  print('GPU Availability ? -->', use_cuda)
+
   if use_cuda:
-    model = model.cuda()
+    model = model.to(device)
 
   total_acc_test = 0
 
@@ -34,10 +35,10 @@ def evaluate(model, test_dataset, batch_size=512):
       test_input = test_input.to(device)
 
       # (5) do the forward pass
-      output = output = model(test_input)
+      output = model(test_input)
 
       # accuracy calculation (just add the correct predicted items to total_acc_test)
-      acc = acc = (torch.argmax(output, dim=-1) == test_label).sum().item()
+      acc = (torch.argmax(output["diacritics"], dim=-1) == test_label).sum().item()
       total_acc_test += acc
 
     # (6) calculate the over all accuracy
