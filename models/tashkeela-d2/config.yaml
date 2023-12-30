@@ -1,0 +1,73 @@
+debug: false
+loader:
+  num-workers: 16
+  wembs-limit: -1
+paths:
+  base: ./dataset/tashkeela
+  constants: ./dataset/helpers/constants
+  load: ./models/Tashkeela-D2/tashkeela-d2.pt
+  resume: ./models/Tashkeela-D2/tashkeela-d2.pt
+  save: ./models
+  word-embs: ./dataset/tashkeela/vocab.vec
+predictor:
+  batch-size: 75
+  gt-signal-prob: 0
+  seed-idx: 0
+  stride: 2
+  window: 20
+run-title: tashkeela-d2
+sentence-break:
+  delimeters:
+  - "\u060C"
+  - "\u061B"
+  - ','
+  - ;
+  - "\xAB"
+  - "\xBB"
+  - '{'
+  - '}'
+  - (
+  - )
+  - '['
+  - ']'
+  - .
+  - '*'
+  - '-'
+  - ':'
+  - '?'
+  - '!'
+  - "\u061F"
+  export-map: false
+  files:
+  - train/train.txt
+  - val/val.txt
+  min-window: 1
+  stride: 2
+  window: 10
+train:
+  batch-size: 128
+  char-embed-dim: 32
+  decoder-units: 256
+  diac-dropout: 0
+  epochs: 1000
+  final-dropout: 0.2
+  lr-factor: 0.5
+  lr-init: 0.002
+  lr-min: 1.0e-07
+  lr-patience: 1
+  max-sent-len: 10
+  max-word-len: 13
+  recurrent-dropout: 0.25
+  resume: false
+  resume-lr: false
+  rnn-cell: lstm
+  sent-dropout: 0.2
+  sent-lstm-layers: 2
+  sent-lstm-units: 256
+  sent-mask-zero: false
+  stopping-delta: 1.0e-07
+  stopping-patience: 3
+  vertical-dropout: 0.25
+  weight-decay: 0
+  word-lstm-layers: 2
+  word-lstm-units: 512
