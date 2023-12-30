@@ -14,7 +14,7 @@ def evaluate(model, test_dataset, batch_size=512):
 
   # GPU Configuration
   use_cuda = torch.cuda.is_available()
-  use_cuda=False
+  # use_cuda=False
   device = torch.device("cuda" if use_cuda else "cpu")
 
   if use_cuda:

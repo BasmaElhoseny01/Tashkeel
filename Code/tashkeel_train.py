@@ -29,11 +29,11 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01):
     ), lr=learning_rate)  # fill this with correct code
 
   # GPU configuration
-  # use_cuda = torch.cuda.is_available()
-  use_cuda = False
+  use_cuda = torch.cuda.is_available()
+  # use_cuda = False
 
-  # device = torch.device("cuda" if use_cuda else "cpu")
-  device = torch.device("cpu")
+  device = torch.device("cuda" if use_cuda else "cpu")
+  # device = torch.device("cpu")
   if use_cuda:
     print("Using GPU")
     model = model.cuda()
