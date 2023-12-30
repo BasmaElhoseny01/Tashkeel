@@ -2,7 +2,7 @@ from utils import *
 from Globals import vocab_size,n_classes
 
 class Tashkeel(nn.Module):
-  def __init__(self, vocab_size=vocab_size, embedding_dim=50, hidden_size=50, n_classes=n_classes):
+  def __init__(self, vocab_size=vocab_size, embedding_dim=100, hidden_size=128, n_classes=n_classes):
     """
     The constructor of our Tashkeel model
     Inputs:
@@ -15,10 +15,11 @@ class Tashkeel(nn.Module):
     self.embedding = nn.Embedding(num_embeddings=vocab_size,embedding_dim=embedding_dim)
 
     # (2) Create an LSTM layer with hidden size = hidden_size and batch_first = True
-    self.lstm =  nn.LSTM(input_size=embedding_dim,hidden_size=hidden_size,batch_first=True)
+    # self.lstm =  nn.LSTM(input_size=embedding_dim,hidden_size=hidden_size,batch_first=True)
+    self.lstm =  nn.LSTM(input_size=embedding_dim,hidden_size=hidden_size,batch_first=True,num_layers=2,bidirectional=True)
 
     # (3) Create a linear layer with number of neorons = n_classes
-    self.linear =  nn.Linear(hidden_size,n_classes)
+    self.linear =  nn.Linear(2*hidden_size,n_classes)
     #####################################################################################################
   
   def forward(self, sentences):

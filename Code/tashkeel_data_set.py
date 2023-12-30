@@ -35,7 +35,7 @@ class TashkeelDataset(torch.utils.data.Dataset):
         # Split Characters
         splitted_x = [list(group) for group in zip_longest(*[iter(setence)] * max_length, fillvalue=pad)]
         # Split Diacrtics
-        splitted_y = [list(group) for group in zip_longest(*[iter(label)] * max_length, fillvalue=classes[""])]
+        splitted_y = [list(group) for group in zip_longest(*[iter(label)] * max_length, fillvalue=classes["P"])]
 
         x_padded.extend(splitted_x)
         y_padded.extend(splitted_y)
@@ -46,7 +46,7 @@ class TashkeelDataset(torch.utils.data.Dataset):
         # To chars
         padded_list_x = setence + [pad] * (max_length - len(setence))
         # To Diacrtics
-        padded_list_y = label + [classes[""]] * (max_length - len(setence))
+        padded_list_y = label + [classes["P"]] * (max_length - len(setence))
 
         x_padded.extend([padded_list_x])
         y_padded.extend([padded_list_y])

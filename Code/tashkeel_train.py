@@ -1,8 +1,7 @@
 from utils import *
+from torch.optim.lr_scheduler import StepLR
 
-
-
-def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01):
+def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01,gamma=0.5, step_size=1):
   """
   This function implements the training logic
   Inputs:
@@ -18,11 +17,11 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01):
   # (1) create the dataloader of the training set (make the shuffle=True)
   # data loader will randomly shuffle the dataset before each epoch. Shuffling is an important practice during training,
   #  and it helps ensure that the model does not learn patterns based on the order of the data.
-  train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size,shuffle=True)
+  train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size,shuffle=False)
 
   # (2) make the criterion cross entropy loss
   # Assuming a multi-class classification task with C classes
-  criterion = CrossEntropyLoss()
+  criterion = CrossEntropyLoss(ignore_index=15)
 
   # (3) create the optimizer (Adam)
   optimizer = torch.optim.Adam(params=model.parameters(
@@ -39,6 +38,9 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01):
     model = model.cuda()
     criterion = criterion.cuda()
   else: print("Using CPU")
+
+
+  scheduler = StepLR(optimizer, step_size=step_size, gamma=gamma)
 
   for epoch_num in range(epochs):
     total_acc_train = 0
@@ -82,7 +84,10 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01):
       # (9) calculate the batch accuracy (just add the number of correct predictions)
       # print(torch.argmax(output, dim=-1))
       # print(torch.argmax(output, dim=-1) == train_label)
-      acc = (torch.argmax(output, dim=-1) == train_label).sum().item()
+      predicted=torch.argmax(output, dim=-1)
+      predicted = predicted[train_label != 15]
+      train_label = train_label[train_label != 15]
+      acc = (predicted == train_label).sum().item()
       total_acc_train += acc
 
       # (10) zero your gradients
@@ -92,7 +97,19 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01):
       batch_loss.backward()
 
       # (12) update the weights with your optimizer
+      torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
       optimizer.step()
+
+
+      # print("train_input",train_input)
+      # print("train_label",train_label)
+
+      
+      print('Epoch: {}/{}.............'.format(epoch_num, epochs), end=' ')
+      print("Loss: {:.4f}".format(batch_loss.item()))
+      # print("correct ",acc,"train_label.numel()",train_label.numel())
+      print("acc:",(acc / train_label.numel()))
+      # break
 
     # epoch loss
     # average loss per sample for the entire training
@@ -104,5 +121,7 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01):
     print(
         f'Epochs: {epoch_num + 1} | Train Loss: {epoch_loss} \
         | Train Accuracy: {epoch_acc}\n')
+    print("Decaying rate")
+    scheduler.step()
 
   ##############################################################################################################

@@ -280,8 +280,8 @@ if __name__ == "__main__":
     #         output_file.write(str(sentence) + '\n')
     print("Getting Tashkeel Done :D",len(sentences_with_tashkel_only),"Sentences")
     
-    # print(sentences_without_tashkel[0])
-    # print(sentences_with_tashkel_only[0])
+    print(sentences_without_tashkel[0])
+    print(sentences_with_tashkel_only[0])
     # print(len(sentences_without_tashkel[0]))
     # print(sentences_without_tashkel[0][0])
     # print(len(sentences_with_tashkel_only[0]))

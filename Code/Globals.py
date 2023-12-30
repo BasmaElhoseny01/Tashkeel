@@ -31,7 +31,8 @@ classes={
       harakat["Shadda Dammatan"]: 11, #Shadda Dammatan
       harakat["Shadda Kasra"]: 12, #Shadda Kasra
       harakat["Shadda Kasratan"]: 13, #Shadda Kasratan
-      "": 14 #Undiacrtized
+      "": 14, #Undiacrtized
+      "P":15
 }
 n_classes=len(classes.keys())
 
