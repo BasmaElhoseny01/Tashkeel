@@ -66,15 +66,24 @@ class TashkeelDataset(torch.utils.data.Dataset):
     
 
     # Add Features Extractions
-    
-
-
-    
-
-
 
     self.x = torch.tensor(x_padded)
     self.y = torch.tensor(y_padded)
+
+    # Draw Histogram for Original sentces
+    sentence_lengths = [len(sentence) for sentence in x]
+    print(sentence_lengths)
+
+    plt.hist(sentence_lengths, bins=10, color='blue', edgecolor='black')
+    # Adding labels and title
+    plt.xlabel('Sentence Length')
+    plt.ylabel('Frequency')
+    plt.title('Distribution of Sentence Lengths')
+
+    # Display the histogram
+    plt.show()
+
+
 
 
   def __len__(self):

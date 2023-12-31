@@ -1,7 +1,7 @@
 from utils import *
 from torch.optim.lr_scheduler import StepLR
 
-def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.001,gamma=0.5, step_size=1):
+def train(model, train_dataset, batch_size=64, epochs=5, learning_rate=0.01,gamma=0.5, step_size=1):
   """
   This function implements the training logic
   Inputs:
@@ -42,12 +42,22 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.001,ga
 
   scheduler = StepLR(optimizer, step_size=step_size, gamma=gamma)
 
+
+  # Set up subplots
+  fig, axs = plt.subplots(epochs)
+  # fig, axs = plt.subplots(nrows=1, ncols=epochs, figsize=(4*epochs, 4), sharey=True)
+
+
   for epoch_num in range(epochs):
     total_acc_train = 0
     total_loss_train = 0
 
-    for train_input, train_label in tqdm(train_dataloader):
+    # For Drawing
+    batches_accuracies=[]
+    batch_nums=[]
+    batch_counter=0
 
+    for train_input, train_label in tqdm(train_dataloader):
 
       # (4) move the train input to the device
       # Size (batch_size,T)
@@ -101,8 +111,7 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.001,ga
       optimizer.step()
 
 
-      # print("train_input",train_input)
-      # print("train_label",train_label)
+    
 
       
       print('Epoch: {}/{}.............'.format(epoch_num, epochs), end=' ')
@@ -110,6 +119,17 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.001,ga
       # print("correct ",acc,"train_label.numel()",train_label.numel())
       print("acc:",(acc / train_label.numel()))
       # break
+
+      # Add new loss to the plot for drawing
+      batches_accuracies.append((acc / train_label.numel()))
+      batch_counter+=1
+      batch_nums.append(batch_counter)
+    
+
+    axs[epoch_num].plot(batch_nums, batches_accuracies)
+    
+
+
 
     # epoch loss
     # average loss per sample for the entire training
@@ -123,5 +143,9 @@ def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.001,ga
         | Train Accuracy: {epoch_acc}\n')
     print("Decaying rate")
     scheduler.step()
+  
+  # Show plt
+  plt.show()
+  
 
   ##############################################################################################################
