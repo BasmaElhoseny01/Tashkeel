@@ -62,7 +62,7 @@ def clear_punctuations(text):
     all_punctuation = set(string.punctuation)
 
     # Exclude 
-    exclude_chars = {'.', '،', '؛',': '}
+    exclude_chars = {'.', '،', '؛',':'}
 
     # Create a new set without the excluded characters
     filtered_punctuation = all_punctuation - exclude_chars
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     # Use the provided mode
     if args.mode == 'train':
         print("Training mode selected.")
-        mode="trian"
+        mode="train"
     elif args.mode == 'test':
         print("Testing mode selected.")
         mode="test"
