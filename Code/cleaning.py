@@ -60,9 +60,13 @@ def remove_white_spaces(content):
 def clear_punctuations(text):
     # All Punctutation Marks
     all_punctuation = set(string.punctuation)
+    print("all_punctuation",all_punctuation)
 
     # Exclude 
-    exclude_chars = {'.', '،', '؛',':'}
+    exclude_chars = {'.', ',','،', '؛',':',"?","؟",'«','»'}
+
+    # Include Extra Charaters
+    # all_punctuation.add()
 
     # Create a new set without the excluded characters
     filtered_punctuation = all_punctuation - exclude_chars
@@ -217,7 +221,7 @@ if __name__ == "__main__":
 
 
     # Step 2: Tokenization (using nltk sent_tokenize)
-    split_regex="[\n.،؛:]+"
+    split_regex="[\n.,،؛:«»?؟]+"
     print("Tokenization to Sentences",split_regex,".....")
     sentences = get_sentences(data=cleaned_text,split_regex=split_regex)
 

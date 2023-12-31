@@ -37,20 +37,29 @@ def get_params(vocab, tashkeel_map, sentences_file, tashkeel_file):
     sentences = []
     labels = []
 
+    
+    with open(tashkeel_file, 'rb') as file:
+          y = pickle.load(file)  #[['ا']....]
+          labels=y
+
     # Convert Char to its id
     with open(sentences_file, 'rb') as file:
           X = pickle.load(file)  #[['ا']....]
           # Replace Char by its id in the vocab
-          for sentence in X:
-            s = [vocab[char] if char in vocab 
-                 else vocab['<UNK>']
-                 for char in sentence]
+          for i,sentence in enumerate(X):
+            s=[]
+            for j,char in enumerate(sentence):
+              if char in vocab:
+                s.append(vocab[char])
+              else:
+                print("UNK",char)
+                s.append(vocab['<UNK>'])
+                labels[i][j]=15
             sentences.append(s)
 
 
-    with open(tashkeel_file, 'rb') as file:
-          y = pickle.load(file)  #[['ا']....]
-          labels=y
+
+
           
     return sentences, labels, len(sentences)
 
