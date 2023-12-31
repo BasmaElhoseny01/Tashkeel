@@ -32,8 +32,21 @@ print(str(end_time-start_time) + ': Saving model')
 arabic_model.save("word2vec_arabic_model.bin")
 
 # Access word vectors
-vector = arabic_model.wv['اخْتَلَفَتْ']
-similar_words = arabic_model.wv.most_similar('اخْتَلَفَتْ', topn=20)
+# vector = arabic_model.wv['اخْتَلَفَتْ']
+# similar_words = arabic_model.wv.most_similar('اخْتَلَفَتْ', topn=20)
+
+# Example new word
+new_word = 'اختلفت'
+
+# Tokenize the new word (you can use your own tokenizer)
+tokenized_new_word = word_tokenize(new_word)
+print(tokenized_new_word)
+
+# Infer vector for the new word
+vector = arabic_model.wv.get_mean_vector(tokenized_new_word)
+
+# Find top-N similar words to the inferred vector
+similar_words = arabic_model.wv.similar_by_vector(vector, topn=5)
 
 print(vector)
 
