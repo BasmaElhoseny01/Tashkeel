@@ -214,9 +214,9 @@ if __name__ == "__main__":
 
     output_file_path=f"/content/drive/MyDrive/Tashkeel/{mode}_clean_step(1).txt"
     # Open the output file for writing with UTF-8 encoding
-    with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        # Write the data to the output file
-        output_file.write(cleaned_text)
+    # with open(output_file_path, 'w', encoding='utf-8') as output_file:
+    #     # Write the data to the output file
+    #     output_file.write(cleaned_text)
     print("Done Cleaning :D")
 
 
@@ -227,10 +227,10 @@ if __name__ == "__main__":
 
     output_file_path=f"/content/drive/MyDrive/Tashkeel/{mode}_clean_step(2).txt"
     # Open the output file for writing with UTF-8 encoding
-    with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        # Write each element from the list on a new line
-        for sentence in sentences:
-            output_file.write(str(sentence) + '\n')
+    # with open(output_file_path, 'w', encoding='utf-8') as output_file:
+    #     # Write each element from the list on a new line
+    #     for sentence in sentences:
+    #         output_file.write(str(sentence) + '\n')
     print("Done Tokenizing :D")
 
 
@@ -238,12 +238,12 @@ if __name__ == "__main__":
     print("Fxing Diacritization issues .......")
     sentences_with_fixed_diacritization = [fix_diacritization_issue(sentence) for sentence in sentences]
 
-    output_file_path=f"/content/drive/MyDrive/Tashkeel/{mode}_clean_step(3).txt"
+    # output_file_path=f"/content/drive/MyDrive/Tashkeel/{mode}_clean_step(3).txt"
     # Open the output file for writing with UTF-8 encoding
-    with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        # Write each element from the list on a new line
-        for sentence in sentences_with_fixed_diacritization:
-            output_file.write(str(sentence) + '\n')
+    # with open(output_file_path, 'w', encoding='utf-8') as output_file:
+    #     # Write each element from the list on a new line
+    #     for sentence in sentences_with_fixed_diacritization:
+    #         output_file.write(str(sentence) + '\n')
     print("Done Fxing Diacritization issues :D")
 
     # Step 4: Tashkel Removal
@@ -254,6 +254,12 @@ if __name__ == "__main__":
   # Save the NumPy array to a pickle file
     with open(output_file_path, 'wb') as file:
       pickle.dump(sentences_without_tashkel, file)
+
+    # Open the file in write mode
+    with open(f"/content/drive/MyDrive/Tashkeel/{mode}_X.txt", 'w') as file:
+        # Write each element of the list to a new line
+        for item in sentences_without_tashkel:
+            file.write(str(item) + '\n')
 
     # sentences_without_tashkel = [clear_tashkel(sentence,array_format=False) for sentence in sentences_with_fixed_diacritization]
     # output_file_path="/content/drive/MyDrive/Tashkeel/train_clean_step(4).txt"
@@ -283,6 +289,8 @@ if __name__ == "__main__":
     #     for sentence in sentences_with_tashkel_only:
     #         output_file.write(str(sentence) + '\n')
     print("Getting Tashkeel Done :D",len(sentences_with_tashkel_only),"Sentences")
+
+        
     
     print(sentences_without_tashkel[0])
     print(sentences_with_tashkel_only[0])

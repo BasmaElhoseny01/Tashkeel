@@ -1,7 +1,7 @@
 from utils import *
 from torch.optim.lr_scheduler import StepLR
 
-def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.001,gamma=0.5, step_size=1):
+def train(model, train_dataset, batch_size=512, epochs=5, learning_rate=0.01,gamma=0.5, step_size=1):
   """
   This function implements the training logic
   Inputs:

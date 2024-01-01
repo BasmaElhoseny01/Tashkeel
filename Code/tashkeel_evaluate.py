@@ -1,6 +1,8 @@
 from utils import *
+from Globals import vocab_map
 
-def evaluate(model, test_dataset, batch_size=512):
+# def evaluate(model, test_dataset, batch_size=512):
+def evaluate(model, test_dataset, batch_size=2):
   """
   This function takes a NER model and evaluates its performance (accuracy) on a test data
   Inputs:
@@ -28,9 +30,18 @@ def evaluate(model, test_dataset, batch_size=512):
   with torch.no_grad():
 
     for test_input, test_label in tqdm(test_dataloader):
+      # print("....................")
+      # print(test_label)
+
       # (3) move the test input to the device
       test_label = test_label.to(device)
       test_label=test_label.view(-1)
+
+      # Ignore List
+      ignore_list=set([vocab_map['<s>'],vocab_map['</s>'],vocab_map[' '],vocab_map['<PAD>'],vocab_map['<UNK>']])
+      # print("ignore_list",ignore_list)
+      input_mask=np.array([[value.item() not in ignore_list for value in row] for row in test_input])
+      input_mask=input_mask.reshape((input_mask.shape[0]*input_mask.shape[1]))
 
     
       # (4) move the test label to the device
@@ -42,15 +53,25 @@ def evaluate(model, test_dataset, batch_size=512):
 
       # accuracy calculation (just add the correct predicted items to total_acc_test)
       predicted=torch.argmax(output, dim=-1)
+      # print(predicted)
+
+
       # print(test_label)
-      predicted = predicted[test_label != 15]
-      test_label = test_label[test_label != 15]
+      # predicted = predicted[test_label != 15]
+      predicted=predicted[input_mask]
+      test_label = test_label[input_mask]
+      print(">..........")
+      print(test_label)
+      print(predicted)
+
       acc = (predicted == test_label).sum().item()
       # print("acc1",acc/test_label.size(0))
       # print("acc2",total_acc_test/test_label.size(0))
 
       total_acc_test += acc
       counter+=test_label.size(0)
+      break
+      
 
       # print("counter",test_label.size(0),counter)
       # print("acc3",total_acc_test,acc)
