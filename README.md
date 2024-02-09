@@ -4,7 +4,7 @@
 
 
 
-## <img align= center width=50px height=50px src="https://thumbs.gfycat.com/HeftyDescriptiveChimneyswift-size_restricted.gif"> Table of Contents
+## <img align= center width=50px height=50px src="https://user-images.githubusercontent.com/71986226/154075883-2a5679d2-b411-448f-b423-9565babf35aa.gif"> Table of Contents
 - <a href ="#Overview">Overview</a>
 - <a href ="#Achievement">Our Achievement</a>
 - <a href ="#started"> Get Started</a>
@@ -16,18 +16,38 @@
 
 
 ## <img align="center"  width =50px  height =40px src="https://em-content.zobj.net/source/animated-noto-color-emoji/356/waving-hand_1f44b.gif"> Overview <a id = "Overview"></a>
--------------------------------- Given an image containing a single hand 🖐, our system classifies the hand gesture into one of six digits <em>from 0️⃣ to 5️⃣</em>. It handles different lighting effects⚡ and different hand poses as much as possible.
+This projects addresses the problem of arabic diacritization using Bi-LSTM.
 
+for example:
+<div align="center">
 
+> ذَهَبَ اَلْوَلَدُ إِلَى اَلْمَدْرَسَةِ <-- ذهب الولد إلى المدرسة
+</div>
 
 ## <img align="center"  width =60px  height =70px src="https://opengameart.org/sites/default/files/gif_3.gif"> Our Achievement <a id = "Achievement"></a>
- ....................................................  We  have been ranked as the **3rd team** on the leader-board out of 20 teams with an accuracy of **73%** on the hidden test set 
- ![image](https://github.com/BasmaElhoseny01/Tashkeel/assets/72309546/dc9bb03e-7adb-48e3-9214-6918b3214cb2)
-
-
+ We have ranked the **5th team** on the leader-board with an accuracy of **97%** on the hidden test set  ![score_board](assets/score_board.png)
 
 ## <img  align= center width=50px height=50px src="https://cdn.pixabay.com/animation/2022/07/31/06/27/06-27-17-124_512.gif">Get Started <a id = "started"></a>
-...........................................................
+
+For Cleaning
+
+```python
+python cleaning.py --mode (choices: train, test, validate)
+```
+
+For Training
+
+```python
+val_train_sentences, val_train_labels, val_train_size = get_params(vocab_map, classes, 'val_train_X.pickle', 'val_train_Y.pickle')
+val_train_dataset = TashkeelDataset(val_train_sentences, val_train_labels, vocab_map['<PAD>'],max_length)
+model = Tashkeel()
+```
+
+For Inference
+
+```python
+inferencing = model.inference(test_input)
+```
 
 <a id = "modules"></a>
 ##  <img align="center"  width =60px  height =70px src="https://media0.giphy.com/media/QcvMA5Oebq1sk/giphy.gif?cid=6c09b9524f0j11h02l3m2i5ghx4et60zmj4vxls7d3z6xzr8&ep=v1_gifs_search&rid=giphy.gif&ct=g"> Modules
