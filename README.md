@@ -92,6 +92,9 @@ inferencing = model.inference(test_input)
 
 <a id = "network"></a>
 ### <img align="center"  width =60px  height =70px src="https://static.wixstatic.com/media/17ac83_cf1a5fed37844786aafa17eca78679eb~mv2.gif"> Network
+![WhatsApp Image 2024-02-12 at 13 42 10_584857b3](https://github.com/BasmaElhoseny01/Tashkeel/assets/72309546/295ce9a0-5ac5-42aa-a10f-f5beb68e32cd)
+
+```
 class Tashkeel(nn.Module):
   def __init__(self, vocab_size=vocab_size, embedding_dim=100, hidden_size=256, n_classes=n_classes):
     """
@@ -111,6 +114,7 @@ class Tashkeel(nn.Module):
 
     # (3) Create a linear layer with number of neorons = n_classes
     self.linear =  nn.Linear(2*hidden_size,n_classes)
+```
 ##### Reference <a href="https://ieeexplore.ieee.org/document/9274427">Effective Deep Learning Models for Automatic Diacritization of Arabic Text</a> 
   
 
